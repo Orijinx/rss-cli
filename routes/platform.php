@@ -21,6 +21,7 @@ use App\Orchid\Screens\Articles;
 use Symfony\Component\HttpFoundation\Request;
 use App\Models\article;
 use App\Orchid\Screens\ArticlesEditScreen;
+use App\Orchid\Screens\LogListScreen;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,6 +115,7 @@ Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('pla
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
 //Экран для работы со статьями
 Route::screen("articles", Articles::class)->name("platform.article");
+Route::screen("logs", LogListScreen::class)->name("platform.logs");
 Route::post("articles/remove",function(Request $req){
     article::destroy($req->id);
     return back();

@@ -31,6 +31,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('database')
                 ->route('platform.article'),
 
+                Menu::make('Log Screen')
+                ->icon('globe')
+                ->route('platform.logs'),
+
 
 
             Menu::make(__('Users'))
