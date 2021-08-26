@@ -18,6 +18,8 @@ use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 use App\Orchid\Screens\Articles;
+use Symfony\Component\HttpFoundation\Request;
+use App\Models\article;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,4 +112,8 @@ Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('pla
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
 //Экран для работы со статьями
-Route::screen("articles", Articles::class);
+Route::screen("articles", Articles::class)->name("platform.article");
+Route::post("articles/remove",function(Request $req){
+    article::destroy($req->id);
+    return back();
+});

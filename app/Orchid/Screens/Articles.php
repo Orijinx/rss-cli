@@ -28,7 +28,7 @@ class Articles extends Screen
     {
         return [
             "articles" => art::all(),
-            'table'   => art::all(),
+            'table'   => art::filters()->defaultSort('id')->paginate(),
         ];
     }
 
@@ -39,8 +39,9 @@ class Articles extends Screen
      */
     public function commandBar(): array
     {
-        return [Button::make('Go print')->method('print'),];
+        return [];
     }
+
 
     /**
      * Views.
@@ -51,34 +52,60 @@ class Articles extends Screen
     {
         return [Layout::table('table', [
             TD::make('id', 'id')
-                ->width('100')
+                ->width('150')
+                ->sort()
                 ->render(function ($model) {
                     // Please use view('path')
                     return $model->id;
                 }),
-            TD::make('description', 'description')
-                ->width('450')
+            // TD::make('images', 'Image')
+            //     ->width('100')
+            //     ->render(function ($model) {
+            //         $url = $model->images()->first();
+            //         if (!empty($url)) {
+            //             return "<img  width='100' src='{$url->img_url}' alt='Не найдено'>";
+            //         } else {
+            //             return "-";
+            //         }
+            //     }),
+            TD::make('title', 'Title')
+                ->width('200')
+                ->sort()
+                ->align(TD::ALIGN_CENTER)
                 ->render(function ($model) {
                     return Str::limit($model->description, 200);
                 }),
-                TD::make('url', 'Url')
+            TD::make('description', 'Description')
+                ->width('250')
+                ->align(TD::ALIGN_CENTER)
+                ->render(function ($model) {
+                    return Str::limit($model->description, 200);
+                }),
+            TD::make('url', 'Url')
+                ->width('100')
                 ->render(function ($model) {
                     return "<a href='{$model->url}'>{$model->url}</a>";
                 }),
 
-                TD::make('author', 'Author')
-                ->width('200')
+            TD::make('author', 'Author')
+                ->width('50')
                 ->render(function ($model) {
                     return $model->author;
                 }),
-
-
-
-
-                TD::make('datetime', 'Date time')
-                
+            TD::make('datetime', 'Date time')
+                ->width('100')
+                ->sort()
+                ->align(TD::ALIGN_CENTER)
                 ->render(function ($model) {
                     return $model->datetime;
+                }),
+            TD::make()
+                ->width('50')
+                ->render(function ($model) {
+                    return Button::make()->method("remove")->icon("trash")->confirm(__('Are you sure you want to delete the article?'))
+                        ->parameters([
+                            'id' => $model->id,
+                        ]);
                 }),
         ]),];
     }
