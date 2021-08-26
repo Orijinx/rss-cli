@@ -24,7 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        //Выполнение команды артисан, через планирование задач Laravel
+        $schedule->command('rss:parsing')->daily();
     }
 
     /**
