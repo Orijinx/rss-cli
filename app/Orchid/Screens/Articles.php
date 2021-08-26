@@ -9,6 +9,7 @@ use Orchid\Support\Facades\Layout;
 use Orchid\Screen\TD;
 use Orchid\Screen\Repository;
 use Illuminate\Support\Str;
+use Orchid\Screen\Actions\Link;
 
 class Articles extends Screen
 {
@@ -55,8 +56,11 @@ class Articles extends Screen
                 ->width('150')
                 ->sort()
                 ->render(function ($model) {
+                    
                     // Please use view('path')
-                    return $model->id;
+                    return Link::make($model->id)
+                    ->icon("brush")
+                    ->route('platform.article.edit', $model);
                 }),
             // TD::make('images', 'Image')
             //     ->width('100')

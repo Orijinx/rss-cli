@@ -20,6 +20,7 @@ use Tabuna\Breadcrumbs\Trail;
 use App\Orchid\Screens\Articles;
 use Symfony\Component\HttpFoundation\Request;
 use App\Models\article;
+use App\Orchid\Screens\ArticlesEditScreen;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,3 +118,5 @@ Route::post("articles/remove",function(Request $req){
     article::destroy($req->id);
     return back();
 });
+Route::screen('article/{article}', ArticlesEditScreen::class)
+    ->name('platform.article.edit');
