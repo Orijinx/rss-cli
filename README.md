@@ -4,6 +4,8 @@
 -   Data Base: **MySql**
 -   PHP version: **8.0.7**
 
+[![GitNFT](https://img.shields.io/badge/%F0%9F%94%AE-Open%20in%20GitNFT-darkviolet?style=flat)](https://gitnft.quine.sh/app/commits/list/repo/rss-cli)
+
 ## Возможности
 - Запуск скрипта по парсингу и логированию RSS ленты РБК.
     ```bash
